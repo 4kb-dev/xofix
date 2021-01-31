@@ -8,6 +8,7 @@ Overcomes the issue in client browsers while using a resource that throws [CORS 
 - CORS header to any resource requests
 - Supports `OPTIONS` [preflight request](https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request) checks
 - Auto setting correct `Content-Type` header
+- Caching and delivery via [Cloudflare CDN](https://www.cloudflare.com/cdn)
 - Resource loading directly from any GitHub repository
 
 ## Usage
