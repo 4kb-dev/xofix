@@ -1,3 +1,4 @@
+import badRequest from './badRequest'
 import setContentType from './setContentType'
 
 /**
@@ -16,10 +17,7 @@ export default async function proxyRequest({
   try {
     urlObjectForUrlToFetch = new URL(urlToFetch)
   } catch (err) {
-    return new Response('Invalid `url` parameter!', {
-      status: 400,
-      statusText: 'Bad Request',
-    })
+    return badRequest('Invalid `url` parameter!')
   }
 
   // rewrite request to point to provided `url`.

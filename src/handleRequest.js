@@ -1,16 +1,19 @@
+import badRequest from 'utils/http.utils/badRequest'
 import handlers from './handlers'
 
 /**
  * Checks the given request and executes the appropriate
- * handler based on the request's http method.
+ * handler based on the provided handler `canHandle` check.
  *
  * @param {Request} request The incoming HTTP request
  * @returns {Response | Promise<Response>} The HTTP response object
  */
 export default function handleRequest(request) {
-  const requestMethod = request.method
-  const toExecute = handlers.find(
-    ({methods}) => !methods || methods.includes(requestMethod)
-  )
+  const toExecute = handlers.find(({canHandle}) => canHandle(request))
+
+  if (!toExecute) {
+    return badRequest('Invalid Configurations!')
+  }
+
   return toExecute.handler(request)
 }

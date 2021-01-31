@@ -6,7 +6,7 @@ import {PRE_FLIGHT_HEADERS, ALL_METHODS_STR} from '../const'
  * @param {Request} request The incoming HTTP request
  * @returns {Response} The HTTP response object
  */
-export default function preFlight(request) {
+export function handler(request) {
   const headers = request.headers
 
   // make sure the necessary headers are present
@@ -26,6 +26,18 @@ export default function preFlight(request) {
 
   // handle standard OPTIONS request
   return new Response(null, {headers: {Allow: ALL_METHODS_STR}})
+}
+
+/**
+ * Returns a boolean flag indicating whether the current
+ * request can be handled by this handler.
+ *
+ * @param {Request} request The incoming HTTP request
+ * @returns {Boolean} Whether this handler can handle the request
+ */
+export function canHandle(request) {
+  const requestMethod = request.method
+  return requestMethod === 'OPTIONS'
 }
 
 /**

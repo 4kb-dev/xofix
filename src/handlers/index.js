@@ -1,10 +1,23 @@
-import {ALLOWED_PROXY_METHODS} from '../const'
-import preFlight from './preFlight'
-import withQueryParams from './withQueryParams'
-import notAllowed from './notAllowed'
+import {
+  canHandle as canHandleNotAllowed,
+  handler as notAllowedHandler,
+} from './notAllowed'
+import {
+  canHandle as canHandlePreFlight,
+  handler as preFlightHandler,
+} from './preFlight'
+import {
+  canHandle as canHandleWithQueryParams,
+  handler as withQueryParamsHandler,
+} from './withQueryParams'
+import {
+  canHandle as canHandleService,
+  handler as serviceHandler,
+} from './service'
 
 export default [
-  {methods: ['OPTIONS'], handler: preFlight},
-  {methods: ALLOWED_PROXY_METHODS, handler: withQueryParams},
-  {handler: notAllowed},
+  {canHandle: canHandlePreFlight, handler: preFlightHandler},
+  {canHandle: canHandleService, handler: serviceHandler},
+  {canHandle: canHandleWithQueryParams, handler: withQueryParamsHandler},
+  {canHandle: canHandleNotAllowed, handler: notAllowedHandler},
 ]

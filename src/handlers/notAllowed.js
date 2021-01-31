@@ -4,9 +4,13 @@
  * @param {Request} request The incoming HTTP request
  * @returns {Response} The HTTP response object
  */
-export default function notAllowed(request) {
-  return new Response(null, {
+export function handler(request) {
+  return new Response('Invalid Usage!', {
     status: 405,
     statusText: 'Method Not Allowed',
   })
+}
+
+export function canHandle() {
+  return true
 }
