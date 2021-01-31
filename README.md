@@ -48,6 +48,18 @@ fetch('https://xofix.4kb.dev/?url=YOUR_API_URL', {
 })
 ```
 
+#### Auto set `content-type` header
+
+You can pass the `set_content_type=true` query parameter to auto set the `content-type` header based on the file extension determined from the url. This is useful for cases where the file might be served from a static text storage with the default `content-type: text/plain; charset=utf-8` header and we need the appropriate content type headers for making use of the file in the client browser.
+
+Example:
+
+The following auto sets the `content-type: text/css; charset=utf-8` header.
+
+```
+https://xofix.4kb.dev/?url=YOUR_CSS_URL.css&set_content_type=true
+```
+
 ## Development
 
 Check out [CloudFlare Workers documentation](https://developers.cloudflare.com/workers/) to get started and install/configure the necessary tools.
