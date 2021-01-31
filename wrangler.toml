@@ -1,0 +1,18 @@
+type = "webpack"
+name = "xofix-dev"
+account_id = "85a1886b20d823a15307b056606fceea"
+workers_dev = true
+webpack_config = "webpack.development.js"
+vars = { DEPLOYMENT_ENV = "dev" }
+
+[env.staging]
+name = "xofix-stage"
+zone_id = "2c5000456bed67a721921fbbc107cd8e"
+webpack_config = "webpack.production.js"
+vars = { DEPLOYMENT_ENV = "staging" }
+
+[env.production]
+name = "xofix"
+zone_id = "2c5000456bed67a721921fbbc107cd8e"
+webpack_config = "webpack.production.js"
+vars = { DEPLOYMENT_ENV = "production" }

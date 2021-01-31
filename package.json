@@ -1,0 +1,36 @@
+{
+  "private": true,
+  "name": "xofix",
+  "version": "0.0.0-development",
+  "description": "Request any resource with CORS headers.",
+  "main": "./src/index.js",
+  "scripts": {
+    "pretest": "eslint ./src",
+    "test": "echo \"Error: no test specified\"",
+    "dev": "wrangler dev",
+    "publish-staging": "wrangler publish --env staging",
+    "publish-production": "npm run test && wrangler publish --env production"
+  },
+  "author": "eMAD <emad.alam@yahoo.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@cloudflare/workers-types": "^2.1.0",
+    "@cloudflare/wrangler": "^1.12.2",
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@partumgmbh/eslint-config": "^2.0.0",
+    "eslint": "^7.18.0",
+    "husky": "^4.3.8",
+    "lint-staged": "^10.5.3",
+    "prettier-eslint": "^12.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix"
+  }
+}
