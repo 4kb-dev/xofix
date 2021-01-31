@@ -1,23 +1,17 @@
-import {setContentType} from '../utils'
+import setContentType from './setContentType'
 
 /**
- * Handler to proxy the provided url requests with the original
- * origin headers and return the response with CORS headers.
+ * Proxies and fetches the given url and returns a response with CORS header.
  *
- * @param {Request} request The incoming HTTP request
- * @returns {Promise<Response>} Promise that resolves with the HTTP response object
+ * @param {ProxyRequestOptions} options The options to proxy the request
+ * @returns {Promise<Response>} Promise that resolves with the proxy response
  */
-export default async function proxy(request) {
-  const url = new URL(request.url)
-  const urlToFetch = url.searchParams.get('url')
-
-  // a valid `url` query param is needed
-  if (!urlToFetch) {
-    return new Response('Missing `url` parameter!', {
-      status: 400,
-      statusText: 'Bad Request',
-    })
-  }
+export default async function proxyRequest({
+  request,
+  urlToFetch,
+  autoSetContentType = true,
+}) {
+  // `urlToFetch` needs to be a valid URL
   let urlObjectForUrlToFetch = null
   try {
     urlObjectForUrlToFetch = new URL(urlToFetch)
@@ -44,9 +38,16 @@ export default async function proxy(request) {
   proxyResponse.headers.append('Vary', 'Origin')
 
   // force set content type header based on the file extension
-  if (url.searchParams.get('set_content_type')) {
+  if (autoSetContentType) {
     setContentType(proxyResponse, urlObjectForUrlToFetch.pathname)
   }
 
   return proxyResponse
 }
+
+/**
+ * @typedef {Object} ProxyRequestOptions The options for proxy request
+ * @property {Request} request The original HTTP request object
+ * @property {String} urlToFetch The url to proxy the request
+ * @property {Boolean} [autoSetContentType=true] Whether to auto set the content-type header on the response
+ */
