@@ -2,11 +2,17 @@
 
 [Cloudflare Worker](https://workers.cloudflare.com/) for requesting any resource with the [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) header.
 
-Overcomes the issue in client browsers while using any resource that throws [CORS errors](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors). This can be used for any kind of resources including any API requests.
+Overcomes the issue in client browsers while using a resource that throws [CORS errors](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors). This can be used for all kind of resources including any API requests.
+
+#### Features
+- CORS header to any resource requests
+- Supports `OPTIONS` [preflight request](https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request) checks
+- Auto setting correct `Content-Type` header
+- Resource loading directly from any GitHub repository
 
 ## Usage
 
-Pass the [`encoded`](https://developer.mozilla.org/en-us/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent) resource url as the `url` param that you would like to fetch with the CORS header.
+Pass the [`encoded`](https://developer.mozilla.org/en-us/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent) resource url as the `url` param which you would like to fetch with the CORS header.
 
 ###### `https://xofix.4kb.dev/?url=YOUR_RESOURCE_URL`
 
@@ -54,11 +60,29 @@ You can pass the `set_content_type=true` query parameter to auto set the `conten
 
 Example:
 
-The following auto sets the `content-type: text/css; charset=utf-8` header.
+The following auto sets the `content-type: text/css; charset=utf-8` header if the url ends with `.css` extension.
 
 ```
 https://xofix.4kb.dev/?url=YOUR_CSS_URL.css&set_content_type=true
 ```
+
+#### GitHub repositories
+
+To load resources directly from a github repository, use the base url `https://xofix.4kb.dev/github` and append the Github raw url of the file you want to load.
+
+Steps
+- Navigate to the branch or tag and then to the file that you would like to load
+- Click on the `Raw` button
+- Copy the url path after the `https://raw.githubusercontent.com`
+- Append this path after the `https://xofix.4kb.dev/github` to get your final url
+
+Example:
+
+```
+https://xofix.4kb.dev/github/emadalam/atvjs/v0.2.9/dist/atv.js
+```
+
+*Note: For the files loaded from GitHub, the `content-type` header is always set automatically based on the file extension, no flag needs to be specified. This is to ensure easier integrations as the files served from the GitHub raw urls never has the correct content type header.*
 
 ## Development
 
