@@ -1,3 +1,5 @@
+import {setContentType} from '../utils'
+
 /**
  * Handler to proxy the provided url requests with the original
  * origin headers and return the response with CORS headers.
@@ -40,6 +42,11 @@ export default async function proxy(request) {
   proxyResponse.headers.set('Access-Control-Allow-Origin', '*')
   // append to/Add Vary header so browser will cache response correctly
   proxyResponse.headers.append('Vary', 'Origin')
+
+  // force set content type header based on the file extension
+  if (url.searchParams.get('set_content_type')) {
+    setContentType(proxyResponse, urlObjectForUrlToFetch.pathname)
+  }
 
   return proxyResponse
 }
