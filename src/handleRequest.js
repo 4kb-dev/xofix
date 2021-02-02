@@ -1,4 +1,4 @@
-import badRequest from 'utils/http.utils/badRequest'
+import {badRequest} from 'utils/http.utils'
 import handlers from './handlers'
 
 /**

@@ -1,9 +1,10 @@
 import badRequest from 'utils/http.utils/badRequest'
 import github from './github'
+import gitlab from './gitlab'
 
 const SERVICES = {
   github,
-  // add more services
+  gitlab,
 }
 
 /**

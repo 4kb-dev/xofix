@@ -1,15 +1,15 @@
 # xofix
 
-[Cloudflare Worker](https://workers.cloudflare.com/) for requesting any resource with the [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) header.
-
-Overcomes the issue in client browsers while using a resource that throws [CORS errors](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors). This can be used for all kind of resources including any API requests.
+[Cloudflare Worker](https://workers.cloudflare.com/) for serving any resource via CDN with the [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) and correct content-type header.
 
 #### Features
-- CORS header to any resource requests
+
+- CORS header to any resource requests - fix [CORS errors](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors)
 - Supports `OPTIONS` [preflight request](https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request) checks
+- Supports any resource including API requests
 - Auto setting correct `Content-Type` header
 - Caching and delivery via [Cloudflare CDN](https://www.cloudflare.com/cdn)
-- Resource loading directly from any GitHub repository
+- Resource loading directly from any GitHub/GitLab repository
 
 ## Usage
 
@@ -67,23 +67,26 @@ The following auto sets the `content-type: text/css; charset=utf-8` header if th
 https://xofix.4kb.dev/?url=YOUR_CSS_URL.css&set_content_type=true
 ```
 
-#### GitHub repositories
+#### GitHub/GitLab repositories
 
-To load resources directly from a github repository, use the base url `https://xofix.4kb.dev/github` and append the Github raw url of the file you want to load.
+To load resources directly from a GitHub/GitLab repository, use the base url `https://xofix.4kb.dev/github` or `https://xofix.4kb.dev/gitlab` respectively, and append the GitHub/GitLab raw url of the file you want to load.
 
 Steps
 - Navigate to the branch or tag and then to the file that you would like to load
-- Click on the `Raw` button
-- Copy the url path after the `https://raw.githubusercontent.com`
-- Append this path after the `https://xofix.4kb.dev/github` to get your final url
+- Click on the `Raw` button to navigate to the raw url
+- Copy the url path after the `https://raw.githubusercontent.com` for GitHub or `https://gitlab.com` in case of GitLab
+- Append this path after the `https://xofix.4kb.dev/github` or `https://xofix.4kb.dev/gitlab`  to get your final url
 
 Example:
 
 ```
 https://xofix.4kb.dev/github/emadalam/atvjs/v0.2.9/dist/atv.js
+
+https://xofix.4kb.dev/gitlab/pages/plain-html/-/blob/master/public/index.html
 ```
 
-*Note: For the files loaded from GitHub, the `content-type` header is always set automatically based on the file extension, no flag needs to be specified. This is to ensure easier integrations as the files served from the GitHub raw urls never has the correct content type header.*
+
+*Note: For the files loaded from GitHub/GitLab, the `content-type` header is always set automatically based on the file extension, no flag needs to be specified. This is to ensure easier integrations as the files served from the git raw urls never has the correct content type header.*
 
 ## Development
 
