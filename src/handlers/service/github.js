@@ -1,5 +1,4 @@
-import {proxyRequest} from 'utils/http.utils'
-import badRequest from 'utils/http.utils/badRequest'
+import {proxyRequest, badRequest} from 'utils/http.utils'
 
 const RAW_BASE_URL = 'https://raw.githubusercontent.com'
 const ROOT_PATH = '/github'

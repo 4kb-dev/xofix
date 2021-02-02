@@ -1,6 +1,5 @@
 import {ALLOWED_PROXY_METHODS} from 'const'
-import badRequest from 'utils/http.utils/badRequest'
-import proxyRequest from 'utils/http.utils/proxyRequest'
+import {proxyRequest, badRequest} from 'utils/http.utils'
 
 /**
  * Handler to proxy the provided url requests with the original
